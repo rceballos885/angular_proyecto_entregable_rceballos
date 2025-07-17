@@ -5,12 +5,13 @@ import { MatTableModule } from '@angular/material/table';
 import {MatIconModule} from '@angular/material/icon';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatButtonModule} from '@angular/material/button';
+import { FullnamePipe } from '../../shared/pipes/fullname-pipe';
 
 
 
 @Component({
   selector: 'app-students-table',
-  imports: [MatTableModule, MatIconModule, MatMenuModule, MatButtonModule],
+  imports: [MatTableModule, MatIconModule, MatMenuModule, MatButtonModule, FullnamePipe],
   templateUrl: './students-table.html',
   styleUrl: './students-table.css'
 })
@@ -20,7 +21,7 @@ export class StudentsTable {
 
   // Example property to hold students data
   @Input() students: studens[] = []; // Replace 'any' with the appropriate type if needed
-  displayedColumns: string[] = ['id', 'name','age', 'rut', 'average' , 'main' ];
+  displayedColumns: string[] = ['name','age', 'rut', 'average' , 'main' ];
 
   constructor() {
     // Initialization logic can go here

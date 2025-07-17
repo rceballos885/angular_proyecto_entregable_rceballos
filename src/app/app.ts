@@ -3,12 +3,14 @@ import { RouterOutlet } from '@angular/router';
 import { Toolbar } from "./toolbar/toolbar";
 import { Navbar } from "./navbar/navbar";
 import { CommonModule } from '@angular/common';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient} from '@angular/common/http';
 import { studens } from '../shared/entities';
 import { StudentsTable } from "./students-table/students-table";
+import { AddForm } from "./add-form/add-form";
+
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Toolbar, Navbar, CommonModule, HttpClientModule, StudentsTable],
+  imports: [RouterOutlet, Toolbar, Navbar, CommonModule, StudentsTable, AddForm],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

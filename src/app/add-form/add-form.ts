@@ -1,0 +1,55 @@
+import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators, FormControl } from '@angular/forms';
+import { MatFormFieldModule, FloatLabelType } from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import { MatCardModule } from '@angular/material/card';
+import {MatButtonModule} from '@angular/material/button';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { map } from 'rxjs/operators';
+
+@Component({
+  selector: 'app-add-form',
+  imports: [ReactiveFormsModule, MatCardModule, MatFormFieldModule, CommonModule, MatButtonModule, MatInputModule],
+  templateUrl: './add-form.html',
+  styleUrl: './add-form.css'
+})
+export class AddForm implements OnInit {
+  studentForm!: FormGroup;
+  readonly floatLabelControl = new FormControl('auto' as FloatLabelType);
+
+  constructor(private fb: FormBuilder) { }
+
+  ngOnInit() {
+    // Initialization logic can go here
+    this.studentForm = this.fb.group({
+      name: ['', Validators.required],
+      age: ['', [
+        Validators.required,
+        Validators.min(0), // Assuming age should be at least 1
+      ]],
+      surname: [''], // Optional field
+      rut: ['', Validators.required],
+      average: ['', [
+        Validators.required,
+        Validators.min(0), // Assuming average should be at least 1
+        Validators.max(10) // Assuming average should not exceed 7
+      ]] // Assuming average is required
+    });
+  }
+
+  onSunmit() {
+    // Handle form submission logic here
+    console.log('Form submitted');
+  }
+
+  onReset() {
+    // Reset the form to its initial state
+    this.studentForm.reset();
+  }
+
+  protected readonly floatLabel = toSignal(
+    this.floatLabelControl.valueChanges.pipe(map(v => v || 'auto')),
+    { initialValue: 'auto' },
+  );
+}

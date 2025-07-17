@@ -1,0 +1,85 @@
+<mat-card class="example-card" appearance="outlined">
+    <mat-card-header>
+        <mat-card-title>Agregar Estudiante</mat-card-title>
+        <mat-card-subtitle>Nuevo</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <form [formGroup]="studentForm" (ngSubmit)="onSunmit()">
+            <mat-label>Ingrese los datos del estudiante</mat-label>
+            <div class="form-fields">
+                <mat-form-field [floatLabel]="floatLabel()">
+                    <mat-label>Nombre</mat-label>
+                    <input matInput placeholder="Escriba Nombre" id="name" type="text" formControlName="name" />
+                    <div>
+                        <mat-error *ngIf="studentForm.get('name')?.hasError('required')">
+                            El nombre es requerido
+                        </mat-error>
+                    </div>
+                </mat-form-field>
+
+                <mat-form-field [floatLabel]="floatLabel()">
+                    <mat-label>Apellido</mat-label>
+                    <input matInput placeholder="Escriba Apellido" id="surname" type="text" formControlName="surname" />
+                    <div>
+                        <mat-error *ngIf="studentForm.get('surname')?.hasError('required')">
+                            El apellido es requerido
+                        </mat-error>
+                    </div>
+                </mat-form-field>
+
+                <mat-form-field [floatLabel]="floatLabel()">
+                    <mat-label>Rut</mat-label>
+                    <input matInput placeholder="Escriba Rut" id="rut" type="text" formControlName="rut" />
+                    <div>
+                        <mat-error *ngIf="studentForm.get('rut')?.hasError('required')">
+                            El rut es requerido
+                        </mat-error>
+                        <mat-error *ngIf="studentForm.get('rut')?.hasError('pattern')">
+                            El rut debe tener el formato correcto
+                        </mat-error>
+                    </div>
+                </mat-form-field>
+
+                <mat-form-field [floatLabel]="floatLabel()">
+                    <mat-label>Edad</mat-label>
+                    <input matInput placeholder="Indique la edad" type="number" id="age" formControlName="age" />
+                    <div>
+                        <mat-error *ngIf="studentForm.get('age')?.hasError('required')">
+                            La edad es requerida
+                        </mat-error>
+                        <mat-error *ngIf="studentForm.get('age')?.hasError('min')">
+                            La edad debe ser mayor a 0
+                        </mat-error>
+                        <mat-error *ngIf="studentForm.get('age')?.hasError('max')">
+                            La edad debe ser menor a 120
+                        </mat-error>
+                    </div>
+                </mat-form-field>
+            </div>
+
+            <div class="example-form-fields"></div>
+            <div class="example-form-fields">
+                <mat-form-field [floatLabel]="floatLabel()">
+                    <mat-label>Promedio</mat-label>
+                    <input matInput placeholder="Indique el promedio" type="number" id="average"
+                        formControlName="average" />
+                    <div>
+                        <mat-error *ngIf="studentForm.get('average')?.hasError('required')">
+                            El promedio es requerido
+                        </mat-error>
+                        <mat-error *ngIf="studentForm.get('average')?.hasError('min')">
+                            El promedio debe ser mayor a 0
+                        </mat-error>
+                        <mat-error *ngIf="studentForm.get('average')?.hasError('max')">
+                            El promedio debe ser menor a 10
+                        </mat-error>
+                    </div>
+                </mat-form-field>
+            </div>
+        </form>
+    </mat-card-content>
+    <mat-card-actions align="end">
+        <button matButton>Guardar</button>
+        <button matButton (click)="onReset()">Limpiar</button>
+    </mat-card-actions>
+</mat-card>
