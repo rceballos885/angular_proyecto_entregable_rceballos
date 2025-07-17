@@ -4,7 +4,7 @@
         <mat-card-subtitle>Nuevo</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
-        <form [formGroup]="studentForm" (ngSubmit)="onSunmit()">
+        <form [formGroup]="studentForm" (ngSubmit)="onSubmit()">
             <mat-label>Ingrese los datos del estudiante</mat-label>
             <div class="form-fields">
                 <mat-form-field [floatLabel]="floatLabel()">
@@ -79,7 +79,12 @@
         </form>
     </mat-card-content>
     <mat-card-actions align="end">
-        <button matButton>Guardar</button>
-        <button matButton (click)="onReset()">Limpiar</button>
+        <!-- <button matButton type="submit">Guardar</button> -->
+        <button matButton type="button" (click)="onSubmit()" [disabled]="studentForm.invalid">Guardar</button>
+        <button matButton type="reset" (click)="onReset()">Limpiar</button>
     </mat-card-actions>
+
+
+    {{studentForm.value | json}}
+    {{studentForm.invalid | json}}
 </mat-card>

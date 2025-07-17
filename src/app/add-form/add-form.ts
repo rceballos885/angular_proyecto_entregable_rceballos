@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators, FormControl } from '@angular/forms';
 import { MatFormFieldModule, FloatLabelType } from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
@@ -7,6 +7,7 @@ import { MatCardModule } from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs/operators';
+import { student } from '../../shared/entities';
 
 @Component({
   selector: 'app-add-form',
@@ -16,6 +17,7 @@ import { map } from 'rxjs/operators';
 })
 export class AddForm implements OnInit {
   studentForm!: FormGroup;
+  @Output() studentAdded = new EventEmitter<student>();
   readonly floatLabelControl = new FormControl('auto' as FloatLabelType);
 
   constructor(private fb: FormBuilder) { }
@@ -38,9 +40,17 @@ export class AddForm implements OnInit {
     });
   }
 
-  onSunmit() {
+  onSubmit() {
     // Handle form submission logic here
     console.log('Form submitted');
+    if (this.studentForm.valid) {
+      const newStudent: student = this.studentForm.value;
+      this.studentAdded.emit(newStudent);
+      console.log('New student added:', newStudent);
+      this.onReset(); // Reset the form after submission
+    } else {
+      console.error('Form is invalid');
+    }
   }
 
   onReset() {

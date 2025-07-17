@@ -1,4 +1,4 @@
-export interface studens {
+export interface student {
     name: string;
     surname?: string; // Optional field
     age: number; // Optional field
