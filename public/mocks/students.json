@@ -1,28 +1,37 @@
-[{
-    "id": 1,
-    "name": "John Doe",
-    "description": "A student in the Angular course",
-    "createdAt": "2023-10-01T12:00:00Z",
-    "updatedAt": "2023-10-01T12:00:00Z"
-},
-{
-    "id": 2,
-    "name": "Jane Smith",
-    "description": "Another student in the Angular course",
-    "createdAt": "2023-10-02T12:00:00Z",
-    "updatedAt": "2023-10-02T12:00:00Z"
-},
-{
-    "id": 3,
-    "name": "Alice Johnson",
-    "description": "A student who loves coding",
-    "createdAt": "2023-10-03T12:00:00Z",
-    "updatedAt": "2023-10-03T12:00:00Z"
-},
-{
-    "id": 4,
-    "name": "Bob Brown",
-    "description": "A student with a passion for Angular",
-    "createdAt": "2023-10-04T12:00:00Z",
-    "updatedAt": "2023-10-04T12:00:00Z"
-}]
+[
+    {
+        "id": 1,
+        "name": "John Doe",
+        "age": 29,
+        "rut": "26938659-2",
+        "average": 10
+    },
+    {
+        "id": 2,
+        "name": "Jane Smith",
+        "age": 20,
+        "rut": "27000000-1",
+        "average": 9
+    },
+    {
+        "id": 3,
+        "name": "Alice Johnson",
+        "age": 30,
+        "rut": "28000000-0",
+        "average": 7
+    },
+    {
+        "id": 4,
+        "name": "Bob Brown",
+        "age": 15,
+        "rut": "29000000-3",
+        "average": 8.8
+    },
+    {
+        "id": 5,
+        "name": "Charlie Green",
+        "age": 26,
+        "rut": "10000000-4",
+        "average": 9.3
+    }
+]

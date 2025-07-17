@@ -1,0 +1,6 @@
+.navbar {
+  grid-area: navbar;
+  background-color: #f8f9fa; /* Light background for the navbar */
+  padding: 10px; /* Padding for better spacing */
+  border: 1px solid blue; /* Right border for separation */
+}

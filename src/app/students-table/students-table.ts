@@ -1,15 +1,16 @@
 import { Component, Input, NgModule } from '@angular/core';
 import { studens } from '../../shared/entities';
 
-import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
-import { MatSortModule } from '@angular/material/sort';
+import {MatIconModule} from '@angular/material/icon';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatButtonModule} from '@angular/material/button';
 
 
 
 @Component({
   selector: 'app-students-table',
-  imports: [MatTableModule],
+  imports: [MatTableModule, MatIconModule, MatMenuModule, MatButtonModule],
   templateUrl: './students-table.html',
   styleUrl: './students-table.css'
 })
@@ -19,7 +20,7 @@ export class StudentsTable {
 
   // Example property to hold students data
   @Input() students: studens[] = []; // Replace 'any' with the appropriate type if needed
-  displayedColumns: string[] = ['id', 'name', 'description', 'createdAt', 'updatedAt'];
+  displayedColumns: string[] = ['id', 'name','age', 'rut', 'average' , 'main' ];
 
   constructor() {
     // Initialization logic can go here
@@ -37,4 +38,13 @@ export class StudentsTable {
     // Example: console.log('Sort changed:', event);
   }
 
+  
+
 }
+
+function deleteStudent(id: number): void {
+    // Implement the logic to delete a student by id
+    debugger;
+    console.log(`Delete student with id: ${id}`);
+    // You can emit an event or call a service to handle the deletion
+  }

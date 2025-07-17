@@ -1,7 +1,7 @@
 export interface studens {
     id: number;
     name: string;
-    description?: string; // Optional field
-    createdAt: Date;
-    updatedAt: Date;
+    age: number; // Optional field
+    rut: string;
+    average: number;
     }
