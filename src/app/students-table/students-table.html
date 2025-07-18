@@ -25,7 +25,6 @@
         <td mat-cell *matCellDef="let element"> {{element.average}} </td>
     </ng-container>
 
-
     <ng-container matColumnDef="main">
         <th mat-header-cell *matHeaderCellDef> ACCION </th>
         <td mat-cell *matCellDef="let element">
@@ -38,7 +37,7 @@
                         editar
                     </button>
 
-                    <button mat-menu-item extended onclick="deleteStudent(element.id)">
+                    <button mat-menu-item extended (click)="openDialog(element)">
                         <mat-icon>delete</mat-icon>
                         Borrar
                     </button>
