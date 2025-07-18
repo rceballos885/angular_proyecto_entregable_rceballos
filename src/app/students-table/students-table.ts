@@ -5,17 +5,18 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { FullnamePipe } from '../../shared/pipes/fullname-pipe';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
-import {  
+import {
   MatDialog
 } from '@angular/material/dialog';
 import { ModalDelete } from '../modal-delete/modal-delete';
-
-
+import { EditForm } from '../edit-form/edit-form';
 
 @Component({
   selector: 'app-students-table',
-  imports: [MatTableModule, MatIconModule, MatMenuModule, MatButtonModule, FullnamePipe],
+  imports: [MatTableModule, MatIconModule, MatMenuModule, MatButtonModule, FullnamePipe, MatSnackBarModule],
   templateUrl: './students-table.html',
   styleUrl: './students-table.css'
 })
@@ -27,7 +28,8 @@ export class StudentsTable {
   @Input() students: student[] = []; // Replace 'any' with the appropriate type if needed
   @Output() studentsChangeList = new EventEmitter<student[]>();
   displayedColumns: string[] = ['name', 'age', 'rut', 'average', 'main'];
-  
+  private _snackBar = inject(MatSnackBar);
+
   readonly dialog = inject(MatDialog);
 
   constructor() {
@@ -52,5 +54,17 @@ export class StudentsTable {
 
     this.studentsChangeList.emit(this.students.filter(student => student.id !== id));
     // You can emit an event or call a service to handle the deletion
+  }
+
+  editStudent(student: student) {
+    this.openSnackBar('Esta Opcion aun no está habilitada para esta sección', 'Cerrar');
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 5000, // Duration in milliseconds
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+    });
   }
 }
