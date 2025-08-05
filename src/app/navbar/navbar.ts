@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import {RoutePaths} from '../../shared/routes';
 
 @Component({
   selector: 'app-navbar',
@@ -9,6 +10,7 @@ import { RouterModule } from '@angular/router';
 })
 export class Navbar {
 // @Output() activeSection = new EventEmitter<string>(); // Default active section
+RoutePaths = RoutePaths; // Importing the RoutePaths enum
   constructor() {
     // Initialization logic can go here
   }

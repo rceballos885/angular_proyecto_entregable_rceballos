@@ -1,10 +1,10 @@
 <div>
     <h2>Acciones</h2>
     <ul>
-        <li routerLink="/students" routerLinkActive="active">
+        <li [routerLink]="[RoutePaths.STUDENTS]" routerLinkActive="active">
             <a> Ver estudiantes </a>
         </li>
-        <li routerLink="/register-student">
+        <li [routerLink]="[RoutePaths.REGISTER_ST]">
             <a> Nuevo estudiante </a>
         </li>
         <!-- <li (click)="changeSection('listStudents')">
