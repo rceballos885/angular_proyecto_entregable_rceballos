@@ -1,12 +1,18 @@
 <div>
     <h2>Acciones</h2>
     <ul>
-        <li (click)="changeSection('listStudents')">
+        <li routerLink="/students" routerLinkActive="active">
+            <a> Ver estudiantes </a>
+        </li>
+        <li routerLink="/register-student">
+            <a> Nuevo estudiante </a>
+        </li>
+        <!-- <li (click)="changeSection('listStudents')">
             Ver estudiantes
         </li>
         <li (click)="changeSection('formStudent')">
             Nuevo estudiante
-        </li>
+        </li> -->
         <!-- <li>
             <a href="/courses">Eliminar</a>
         </li>
