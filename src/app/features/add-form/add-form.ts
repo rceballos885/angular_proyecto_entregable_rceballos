@@ -7,7 +7,7 @@ import { MatCardModule } from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs/operators';
-import { student } from '../../shared/entities';
+import { student } from '../../../shared/entities';
 
 @Component({
   selector: 'app-add-form',

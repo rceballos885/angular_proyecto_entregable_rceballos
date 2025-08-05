@@ -9,7 +9,7 @@ import {
   MatDialogRef,
   MatDialogTitle,
 } from '@angular/material/dialog';
-import { student } from '../../shared/entities';
+import { student } from '../../../shared/entities';
 
 
 @Component({

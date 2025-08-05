@@ -1,22 +1,25 @@
-import { Component, Input, Output, EventEmitter, inject } from '@angular/core';
-import { student } from '../../shared/entities';
+import { Component, Input, Output, EventEmitter, inject, OnInit } from '@angular/core';
+import { student } from '../../../shared/entities';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
-import { FullnamePipe } from '../../shared/pipes/fullname-pipe';
+import { FullnamePipe } from '../../../shared/pipes/fullname-pipe';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ChangeDetectorRef } from '@angular/core';
 
 import {
   MatDialog
 } from '@angular/material/dialog';
 import { ModalDelete } from '../modal-delete/modal-delete';
 import { EditForm } from '../edit-form/edit-form';
+import { StudentApi } from './student-api';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-students-table',
-  imports: [MatTableModule, MatIconModule, MatMenuModule, MatButtonModule, FullnamePipe, MatSnackBarModule],
+  imports: [MatTableModule, MatIconModule, MatMenuModule, MatButtonModule, FullnamePipe, MatSnackBarModule, CommonModule ],
   templateUrl: './students-table.html',
   styleUrl: './students-table.css'
 })
@@ -25,15 +28,30 @@ export class StudentsTable {
   // You can implement methods to handle sorting, filtering, etc. here
 
   // Example property to hold students data
-  @Input() students: student[] = []; // Replace 'any' with the appropriate type if needed
+  students!: student[]; // Replace 'any' with the appropriate type if needed
   @Output() studentsChangeList = new EventEmitter<student[]>();
   displayedColumns: string[] = ['name', 'age', 'rut', 'average', 'main'];
   private _snackBar = inject(MatSnackBar);
 
   readonly dialog = inject(MatDialog);
 
-  constructor() {
+  constructor(private studentApi: StudentApi, private cdr: ChangeDetectorRef) {
     // Initialization logic can go here
+  }
+
+  ngOnInit() {
+    // Fetch students data from the API or service
+    this.studentApi.getStudents().subscribe({
+      next: (data) => {
+        debugger
+        this.students = data;
+         this.cdr.detectChanges();
+        console.log('Students fetched successfully:', data);
+      },
+      error: (err) => {
+        console.error('Error fetching students:', err);
+      }
+    });
   }
 
   openDialog(student: student): void {

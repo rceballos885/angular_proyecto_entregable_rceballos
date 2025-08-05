@@ -1,0 +1,57 @@
+<div *ngIf="students; else loading">
+    <table mat-table [dataSource]="students" class="mat-elevation-z8">
+
+        <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> NOMBRE </th>
+            <td mat-cell *matCellDef="let element"> {{element.name | fullname:element.surname}} </td>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="age">
+            <th mat-header-cell *matHeaderCellDef> EDAD </th>
+            <td mat-cell *matCellDef="let element"> {{element.age}} </td>
+        </ng-container>
+        <!-- Weight Column -->
+        <ng-container matColumnDef="rut">
+            <th mat-header-cell *matHeaderCellDef> RUT </th>
+            <td mat-cell *matCellDef="let element"> {{element.rut}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="average">
+            <th mat-header-cell *matHeaderCellDef> PROMEDIO </th>
+            <td mat-cell *matCellDef="let element"> {{element.average}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="main">
+            <th mat-header-cell *matHeaderCellDef> ACCION </th>
+            <td mat-cell *matCellDef="let element">
+                <button matMiniFab aria-label="Example icon button with a delete icon">
+                    <mat-icon [matMenuTriggerFor]="menu">more_vert</mat-icon>
+
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item extended (click)="editStudent(element)">
+                            <mat-icon>edit</mat-icon>
+                            editar
+                        </button>
+
+                        <button mat-menu-item extended (click)="openDialog(element)">
+                            <mat-icon>delete</mat-icon>
+                            Borrar
+                        </button>
+                    </mat-menu>
+                </button>
+
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    </table>
+</div>
+<ng-template #loading>
+    <p>Cargando estudiantes...</p>
+</ng-template>
