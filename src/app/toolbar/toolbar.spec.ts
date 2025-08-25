@@ -20,4 +20,12 @@ describe('Toolbar', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  fit('should render title', () => {
+      const fixture = TestBed.createComponent(Toolbar);
+      
+      fixture.detectChanges();
+      const compiled = fixture.nativeElement as HTMLElement;
+      expect(compiled.querySelector('h1')?.textContent).toContain('Hello, Entregable_01_RCeballos');
+    });
 });

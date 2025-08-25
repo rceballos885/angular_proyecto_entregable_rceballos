@@ -1,5 +1,7 @@
 import { Component, inject, Input, OnInit } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterOutlet,Router } from '@angular/router';
+
+import {  } from '@angular/router';
 import { Toolbar } from "./toolbar/toolbar";
 import { Navbar } from "./navbar/navbar";
 import { CommonModule } from '@angular/common';
@@ -10,11 +12,13 @@ import { AddForm } from "./features/add-form/add-form";
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDividerModule } from '@angular/material/divider';
+import { RouterTestingModule } from '@angular/router/testing';
 
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Toolbar, Navbar, CommonModule, StudentsTable, AddForm, MatSnackBarModule, MatDividerModule],
+  imports: [RouterOutlet, Toolbar, Navbar, CommonModule, 
+     MatSnackBarModule, MatDividerModule, RouterTestingModule],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
@@ -23,42 +27,18 @@ export class App implements OnInit {
   students: student[] = [];
   activeSection: string = "listStudents";
   protected title = 'Entregable_01_RCeballos';
-  private _snackBar = inject(MatSnackBar);
+  routerUrl = '';
 
-  constructor(private http: HttpClient) { }
+  constructor(public router: Router) {  }
 
   ngOnInit(): void {
-    this.http.get<student[]>('mocks/students.json').subscribe({
-      next: (data) => {
-        this.students = data;
-        console.log('Students fetched successfully:', data);
-      }
+    // Aquí sí puedes acceder a la URL actual
+    console.log(this.router.url);
+
+    // Si quieres reaccionar a cambios de ruta:
+    this.router.events.subscribe(() => {
+      this.routerUrl = this.router.url;
+      console.log('Ruta actual:', this.router.url);
     });
-  }
-
-  addStudent(student: student) {  
-    console.log('Adding student:', student);
-    student.id = this.students.length + 1; // Assign a new ID based on the current length
-    console.log('Student added:', student);
-    this.students = [...this.students, student];
-    this.openSnackBar('Estudiante agregado correctamente', 'Cerrar');
-  }
-
-  deleteStudent(studens: student[]) {
-    this.students = [...studens];
-    this.openSnackBar('Estudiante eliminado correctamente', 'Cerrar');
-  }
-
-  openSnackBar(message: string, action: string) {
-    this._snackBar.open(message, action, {
-      duration: 5000, // Duration in milliseconds
-      horizontalPosition: 'center',
-      verticalPosition: 'top',
-    });
-  }
-
-  changeSection(section: string) {
-    this.activeSection = section;
-    console.log(`Active section changed to: ${section}`);
   }
 }

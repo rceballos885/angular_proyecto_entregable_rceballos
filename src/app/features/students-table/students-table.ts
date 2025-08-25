@@ -14,12 +14,14 @@ import {
 } from '@angular/material/dialog';
 import { ModalDelete } from '../modal-delete/modal-delete';
 import { EditForm } from '../edit-form/edit-form';
-import { StudentApi } from './student-api';
+import { StudentApi } from '../../services/student-api';
 import { CommonModule } from '@angular/common';
+import { get } from 'http';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-students-table',
-  imports: [MatTableModule, MatIconModule, MatMenuModule, MatButtonModule, FullnamePipe, MatSnackBarModule, CommonModule ],
+  imports: [MatTableModule, MatIconModule, MatMenuModule, MatButtonModule, FullnamePipe, MatSnackBarModule, CommonModule],
   templateUrl: './students-table.html',
   styleUrl: './students-table.css'
 })
@@ -30,8 +32,9 @@ export class StudentsTable {
   // Example property to hold students data
   students!: student[]; // Replace 'any' with the appropriate type if needed
   @Output() studentsChangeList = new EventEmitter<student[]>();
-  displayedColumns: string[] = ['name', 'age', 'rut', 'average', 'main'];
+  displayedColumns: string[] = ['createdAt', 'name', 'phone', 'gender', 'main'];
   private _snackBar = inject(MatSnackBar);
+  private _httpClient = inject(HttpClient);
 
   readonly dialog = inject(MatDialog);
 
@@ -41,17 +44,29 @@ export class StudentsTable {
 
   ngOnInit() {
     // Fetch students data from the API or service
-    this.studentApi.getStudents().subscribe({
+    this.getAllStudents();
+  }
+
+  private getAllStudents() {
+    this.studentApi.getAllStudents().subscribe({
       next: (data) => {
-        debugger
         this.students = data;
-         this.cdr.detectChanges();
+        this.studentsChangeList.emit(this.students);
+        this.cdr.detectChanges();
         console.log('Students fetched successfully:', data);
       },
       error: (err) => {
         console.error('Error fetching students:', err);
       }
     });
+  }
+
+  updateStudentsList(id: number) {
+    // this.students = this.students.filter(student => student.id !== id);
+
+    this.getAllStudents();
+    this.studentsChangeList.emit(this.students);
+    this.cdr.detectChanges();
   }
 
   openDialog(student: student): void {
@@ -70,9 +85,22 @@ export class StudentsTable {
     // Implement the logic to delete a student by id
     console.log(`Delete student with id: ${id}`);
 
-    this.studentsChangeList.emit(this.students.filter(student => student.id !== id));
-    // You can emit an event or call a service to handle the deletion
+    this.studentApi.deleteStudent(id).subscribe({
+      next: () => {
+        console.log(`Student with id ${id} deleted successfully`);
+        this.openSnackBar('Estudiante eliminado correctamente', 'Cerrar');
+        this.updateStudentsList(id);
+      },
+      error: (err) => {
+        console.error(`Error deleting student with id ${id}:`, err);
+        this.openSnackBar('Error al eliminar el estudiante', 'Cerrar');
+      }
+    });
   }
+
+  // this.studentsChangeList.emit(this.students.filter(student => student.id !== id));
+  //     // You can emit an event or call a service to handle the deletion
+  //   }
 
   editStudent(student: student) {
     this.openSnackBar('Esta Opcion aun no está habilitada para esta sección', 'Cerrar');

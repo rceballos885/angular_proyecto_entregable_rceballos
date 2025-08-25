@@ -3,10 +3,16 @@ import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-home',
-  imports: [RouterModule],
+  standalone: true,
+  imports: [
+    RouterModule,
+    // otros imports...
+  ],
   templateUrl: './home.html',
   styleUrl: './home.css'
 })
 export class Home {
-
+  constructor() {
+  // Tu lógica aquí
+}
 }

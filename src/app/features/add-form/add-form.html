@@ -9,69 +9,55 @@
             <div class="form-fields">
                 <mat-form-field [floatLabel]="floatLabel()">
                     <mat-label>Nombre</mat-label>
-                    <input matInput placeholder="Escriba Nombre" id="name" type="text" formControlName="name" />
+                    <input matInput placeholder="Nombre" id="name" type="text" formControlName="name" />
                     <div>
-                        <mat-error *ngIf="studentForm.get('name')?.hasError('required')">
-                            El nombre es requerido
+                        <mat-error
+                            *ngIf="studentForm.get('name')?.invalid && (studentForm.get('name')?.dirty || studentForm.get('name')?.touched)">
+                            Nombre requerido
                         </mat-error>
                     </div>
                 </mat-form-field>
 
                 <mat-form-field [floatLabel]="floatLabel()">
                     <mat-label>Apellido</mat-label>
-                    <input matInput placeholder="Escriba Apellido" id="surname" type="text" formControlName="surname" />
+                    <input matInput placeholder="Apellido" id="surname" type="text" formControlName="surname" />
                     <div>
                         <mat-error *ngIf="studentForm.get('surname')?.hasError('required')">
-                            El apellido es requerido
+                            Apellido requerido
                         </mat-error>
                     </div>
                 </mat-form-field>
 
                 <mat-form-field [floatLabel]="floatLabel()">
-                    <mat-label>Rut</mat-label>
-                    <input matInput placeholder="Escriba Rut" id="rut" type="text" formControlName="rut" />
+                    <mat-label>Género</mat-label>
+                    <input matInput placeholder="Género" type="text" id="gender" formControlName="gender" />
                     <div>
-                        <mat-error *ngIf="studentForm.get('rut')?.hasError('required')">
-                            El rut es requerido
-                        </mat-error>
-                        <mat-error *ngIf="studentForm.get('rut')?.hasError('pattern')">
-                            El rut debe tener el formato correcto
-                        </mat-error>
+                        <mat-error *ngIf="studentForm.get('gender')?.invalid && (studentForm.get('gender')?.dirty || studentForm.get('gender')?.touched)">
+                            Género es requerido
+                        </mat-error>                       
                     </div>
                 </mat-form-field>
 
-                <mat-form-field [floatLabel]="floatLabel()">
-                    <mat-label>Edad</mat-label>
-                    <input matInput placeholder="Indique la edad" type="number" id="age" formControlName="age" />
-                    <div>
-                        <mat-error *ngIf="studentForm.get('age')?.hasError('required')">
-                            La edad es requerida
-                        </mat-error>
-                        <mat-error *ngIf="studentForm.get('age')?.hasError('min')">
-                            La edad debe ser mayor a 0
-                        </mat-error>
-                        <mat-error *ngIf="studentForm.get('age')?.hasError('max')">
-                            La edad debe ser menor a 120
-                        </mat-error>
-                    </div>
-                </mat-form-field>
+                
             </div>
-
-            <div class="example-form-fields"></div>
-            <div class="example-form-fields">
+            
+            <div class="form-fields">
                 <mat-form-field [floatLabel]="floatLabel()">
-                    <mat-label>Promedio</mat-label>
-                    <input matInput placeholder="Indique el promedio" type="number" id="average"
-                        formControlName="average" />
+                    <mat-label>Teléfono</mat-label>
+                    <input matInput placeholder="Teléfono" id="phone" type="text" formControlName="phone" />
                     <div>
-                        <mat-error *ngIf="studentForm.get('average')?.hasError('required')">
-                            El promedio es requerido
+                        <mat-error *ngIf="studentForm.get('phone')?.invalid && (studentForm.get('phone')?.dirty || studentForm.get('phone')?.touched)">
+                            Teléfono requerido
                         </mat-error>
-                        <mat-error *ngIf="studentForm.get('average')?.hasError('min')">
-                            El promedio debe ser mayor a 0
-                        </mat-error>
-                        <mat-error *ngIf="studentForm.get('average')?.hasError('max')">
-                            El promedio debe ser menor a 10
+                    </div>
+                </mat-form-field>
+                <mat-form-field [floatLabel]="floatLabel()">
+                    <mat-label>Dirección</mat-label>
+                    <input matInput placeholder="Dirección" type="text" id="address"
+                        formControlName="address" />
+                    <div>
+                        <mat-error *ngIf="studentForm.get('address')?.invalid && (studentForm.get('address')?.dirty || studentForm.get('address')?.touched)">
+                            Dirección requerida
                         </mat-error>
                     </div>
                 </mat-form-field>
@@ -83,7 +69,6 @@
         <button matButton type="button" (click)="onSubmit()" [disabled]="studentForm.invalid">Guardar</button>
         <button matButton type="reset" (click)="onReset()">Limpiar</button>
     </mat-card-actions>
-
 
     {{studentForm.value | json}}
     {{studentForm.invalid | json}}

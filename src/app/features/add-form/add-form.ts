@@ -26,18 +26,16 @@ export class AddForm implements OnInit {
     // Initialization logic can go here
     this.studentForm = this.fb.group({
       name: ['', Validators.required],
-      age: ['', [
-        Validators.required,
-        Validators.min(0), // Assuming age should be at least 1
+      gender: ['', [
+        Validators.required
       ]],
       surname: [''], // Optional field
-      rut: ['', Validators.required],
-      average: ['', [
+      phone: ['', Validators.required],
+      address: ['', [
         Validators.required,
-        Validators.min(0), // Assuming average should be at least 1
-        Validators.max(10) // Assuming average should not exceed 7
       ]] // Assuming average is required
     });
+
   }
 
   onSubmit() {

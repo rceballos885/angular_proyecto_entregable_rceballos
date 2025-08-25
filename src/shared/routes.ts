@@ -5,5 +5,6 @@ export enum RoutePaths {
     REGISTER_ST = 'register-student',
     REGISTER = 'register',
     COURSES = 'courses',
+    LOGIN = 'login',
     NO_PAGE = '**'
 }
