@@ -4,6 +4,7 @@ import {RoutePaths} from '../../shared/routes';
 
 @Component({
   selector: 'app-navbar',
+  standalone: true,
   imports: [RouterModule],
   templateUrl: './navbar.html',
   styleUrl: './navbar.css'

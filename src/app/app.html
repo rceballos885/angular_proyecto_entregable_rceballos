@@ -1,6 +1,6 @@
 <div class="container">
   <app-toolbar class="toolbar"></app-toolbar>
-  <app-navbar class="navbar"></app-navbar>
+  <app-navbar class="navbar" *ngIf="routerUrl !=='/login'"></app-navbar>
   <!-- <app-navbar (activeSection)="changeSection($event)" class="navbar"></app-navbar> -->
   <div class="content">
 
